@@ -1,1 +1,129 @@
-// Here you can add other styles
+.custom-danger-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    border: 0;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease-in-out;
+}
+
+.custom-danger-button:hover {
+    background-color: #c82333;
+}
+
+.custom-danger-button:active {
+    background-color: #bd2130;
+}
+
+.custom-danger-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+
+.custom-primary-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #343a40;
+    border: 0;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.15s ease-in-out;
+}
+
+.custom-primary-button:hover {
+    background-color: #23272b;
+}
+
+.custom-primary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.custom-primary-button:active {
+    background-color: #1d2124;
+}
+
+.custom-primary-button.bg-light {
+    background-color: #f8f9fa;
+}
+
+.custom-primary-button.text-dark {
+    color: #343a40;
+}
+
+.custom-primary-button:hover.bg-light {
+    background-color: #e2e6ea;
+}
+
+.custom-primary-button:focus.bg-light {
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+}
+
+.custom-primary-button:active.bg-light {
+    background-color: #dae0e5;
+}
+
+.custom-secondary-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #6c757d;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #343a40;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease-in-out;
+}
+
+.custom-secondary-button:hover {
+    background-color: #f8f9fa;
+}
+
+.custom-secondary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.custom-secondary-button:active {
+    background-color: #e2e6ea;
+}
+
+.custom-secondary-button.bg-dark {
+    background-color: #343a40;
+}
+
+.custom-secondary-button.text-light {
+    color: #f8f9fa;
+}
+
+.custom-secondary-button:hover.bg-dark {
+    background-color: #23272b;
+}
+
+.custom-secondary-button:focus.bg-dark {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.custom-secondary-button:active.bg-dark {
+    background-color: #1d2124;
+}
+
+.custom-secondary-button.disabled {
+    opacity: 0.25;
+}
