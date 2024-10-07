@@ -37,7 +37,10 @@ class RoleController extends Controller
     public function store(RoleStoreRequest $request): RedirectResponse
     {
         Role::create($request->validated());
-        return Redirect::route('roles.index')->with('success', 'Role created successfully.');
+
+        toast_message('success', 'Role created successfully.');
+        
+        return Redirect::route('roles.index');
     }
 
     /**
@@ -55,7 +58,10 @@ class RoleController extends Controller
     public function update(RoleUpdateRequest $request, Role $role): RedirectResponse
     {
         $role->update($request->validated());
-        return Redirect::route('roles.index')->with('success', 'Role updated successfully.');
+        
+        toast_message('success', 'Role updated successfully.');
+        
+        return Redirect::route('roles.index');
     }
 
     /**
@@ -64,6 +70,9 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
+
+        toast_message('success', 'Role deleted successfully.');
+        
+        return redirect()->route('roles.index');
     }
 }

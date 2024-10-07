@@ -38,7 +38,10 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         User::create($request->validated());
-        return Redirect::route('users.index')->with('success', 'User created successfully.');
+
+        toast_message('success', 'User created successfully.');
+
+        return Redirect::route('users.index');
     }
 
     /**
@@ -56,7 +59,10 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $user->update($request->validated());
-        return Redirect::route('users.index')->with('success', 'User updated successfully.');
+
+        toast_message('success', 'User updated successfully.');
+
+        return Redirect::route('users.index');
     }
 
     /**
@@ -65,6 +71,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return Redirect::route('users.index')->with('success', 'User deleted successfully.');
+
+        toast_message('success', 'User deleted successfully.');
+
+        return Redirect::route('users.index');
     }
 }

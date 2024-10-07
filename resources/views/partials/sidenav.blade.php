@@ -19,15 +19,15 @@
         
         <x-navbar-title>{{ __('Manage Users') }}</x-navbar-title>
 
-        <x-navbar-item href="/dashboard/users" icon="#cil-people" active="{{ request()->routeIs('users') }}">
+        <x-navbar-item href="/dashboard/users" icon="#cil-people" active="{{ request()->routeIs('users.*') }}">
           {{ __('Users') }}
         </x-navbar-item>
         
-        <x-navbar-item href="/dashboard/roles" icon="#cil-lock-unlocked" active="{{ request()->routeIs('roles') }}">
+        <x-navbar-item href="/dashboard/roles" icon="#cil-lock-unlocked" active="{{ request()->routeIs('roles.*') }}">
           {{ __('Roles') }}
         </x-navbar-item>
         
-        <x-navbar-item href="/dashboard/permissions" icon="#cil-shield-alt" active="{{ request()->routeIs('permissions') }}">
+        <x-navbar-item href="/dashboard/permissions" icon="#cil-shield-alt" active="{{ request()->routeIs('permissions.*') }}">
           {{ __('Permissions') }}
         </x-navbar-item>
       </ul>

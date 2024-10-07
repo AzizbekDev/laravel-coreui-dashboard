@@ -37,7 +37,10 @@ class PermissionController extends Controller
     public function store(PermissionStoreRequest $request): RedirectResponse
     {
         Permission::create($request->validated());
-        return Redirect::route('permissions.index')->with('success', 'Permission created successfully.');
+
+        toast_message('success', 'Permission created successfully.');
+
+        return Redirect::route('permissions.index');
     }
 
     /**
@@ -55,7 +58,10 @@ class PermissionController extends Controller
     public function update(PermissionUpdateRequest $request, Permission $permission): RedirectResponse
     {
         $permission->update($request->validated());
-        return Redirect::route('permissions.index')->with('success', 'Permission updated successfully.');
+
+        toast_message('success', 'Permission updated successfully.');
+
+        return Redirect::route('permissions.index');
     }
 
     /**
@@ -64,6 +70,9 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return Redirect::route('permissions.index')->with('success', 'Permission deleted successfully.');
+
+        toast_message('success', 'Permission deleted successfully.');
+
+        return Redirect::route('permissions.index');
     }
 }
