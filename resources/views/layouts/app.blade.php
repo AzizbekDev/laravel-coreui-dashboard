@@ -16,6 +16,7 @@
             @include('partials.footer')
         </div>
         <!-- Scripts -->
+        @include('partials.alerts')
         <script>
         const header = document.querySelector('header.header');
         document.addEventListener('scroll', () => {

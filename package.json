@@ -21,6 +21,7 @@
         "@coreui/coreui": "^5.1.2",
         "@coreui/icons": "^3.0.1",
         "@popperjs/core": "^2.11.8",
-        "simplebar": "^6.2.7"
+        "simplebar": "^6.2.7",
+        "sweetalert2": "^11.14.1"
     }
 }
