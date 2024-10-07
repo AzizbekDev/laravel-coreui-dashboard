@@ -19,7 +19,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Roles & Permissions
     Route::resource('roles', RoleController::class)->except(['show']);
-    Route::resource('permissions', PermissionController::class);
+    Route::resource('permissions', PermissionController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';
