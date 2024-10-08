@@ -1,6 +1,7 @@
 import './bootstrap';
 import './config';
 import './color-modes';
+import './locale-modes';
 
 import Alpine from 'alpinejs';
 import SimpleBar from 'simplebar';
@@ -29,10 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.toastData) {
         displayToastAlert(window.toastData);
     }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-   
 });
 
 Alpine.start();

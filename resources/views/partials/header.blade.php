@@ -25,6 +25,31 @@
             </li>
             <li class="nav-item dropdown">
                 <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button"
+                    area-expanded="false" data-coreui-toggle="dropdown">
+                    <svg class="icon icon-lg">
+                        <use xlink:href="{{ asset('icons/sprites/free.svg#cil-globe-alt') }}"></use>
+                    </svg>&nbsp;{{ strtoupper(App::getLocale()) }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" style="--cui-dropdown-min-width: 8rem;">
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center {{ App::getLocale() === 'en' ? 'active' : '' }}" type="button"
+                            data-coreui-locale-value="en">
+                                {{ __('English') }}
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center {{ App::getLocale() === 'ru' ? 'active' : '' }}" type="button"
+                            data-coreui-locale-value="ru">
+                                {{ __('Russian') }}
+                        </button>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item py-1">
+                <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button"
                     aria-expanded="false" data-coreui-toggle="dropdown">
                     <svg class="icon icon-lg theme-icon-active">
                         <use xlink:href="{{ asset('icons/sprites/free.svg#cil-contrast') }}"></use>
