@@ -48,7 +48,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission): View
     {
-        $pageTitle = 'Edit Permission';
+        $pageTitle = 'Edit';
         return view('permissions.edit', compact('permission', 'pageTitle'));
     }
 

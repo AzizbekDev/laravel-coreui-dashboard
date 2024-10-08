@@ -48,7 +48,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role): View
     {
-        $pageTitle = 'Edit Role';
+        $pageTitle = 'Edit';
         return view('roles.edit', compact('role', 'pageTitle'));
     }
 

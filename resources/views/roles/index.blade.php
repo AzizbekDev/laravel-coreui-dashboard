@@ -1,13 +1,13 @@
 <x-app-layout :breadcrumbs="[
-    ['label' =>__('Dashboard'), 'href' => route('dashboard')],
-    ['label' => $pageTitle]
+    ['label' => __('Dashboard'), 'href' => route('dashboard')],
+    ['label' => __($pageTitle)]
 ]">
 <div class="body flex-grow-1">
     <div class="container-lg px-4">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between mb-2">
-                    <h1 class="h2">{{ $pageTitle }}</h1>
+                    <h1 class="h2">{{ __($pageTitle) }}</h1>
                     <div>
                         <x-button-link :href="route('roles.create')" color="primary" class="text-white fw-bold">
                             {{ __('Create') }}

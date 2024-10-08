@@ -30,6 +30,16 @@
         <x-navbar-item href="/dashboard/permissions" icon="#cil-shield-alt" active="{{ request()->routeIs('permissions.*') }}">
           {{ __('Permissions') }}
         </x-navbar-item>
+        
+        <x-navbar-title>{{ __('App Settings') }}</x-navbar-title>
+
+        <x-navbar-item href="/dashboard/settings" icon="#cil-cog" active="{{ request()->routeIs('settings.*') }}">
+          {{ __('Settings') }}
+        </x-navbar-item>
+
+        <x-navbar-item href="/dashboard/locale" icon="#cil-globe-alt" active="{{ request()->routeIs('locale.*') }}">
+          {{ __('Locale') }}
+        </x-navbar-item>
       </ul>
       <div class="sidebar-footer border-top d-none d-md-flex">     
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

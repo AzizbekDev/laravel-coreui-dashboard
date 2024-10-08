@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        $pageTitle = 'Edit User';
+        $pageTitle = 'Edit';
         return view('users.edit', compact('user', 'pageTitle'));
     }
 

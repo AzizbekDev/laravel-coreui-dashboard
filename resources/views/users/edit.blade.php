@@ -1,7 +1,7 @@
 <x-app-layout :breadcrumbs="[
     ['label' => __('Dashboard'), 'href' => route('dashboard')],
     ['label' => __('Users'), 'href' => route('users.index')],
-    ['label' => $pageTitle]
+    ['label' => __($pageTitle)]
 ]">
     <div class="body flex-grow-1">
         <div class="container-lg px-4">
@@ -9,7 +9,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $pageTitle }}</h5>
+                            <h5 class="card-title">{{ __('Edit User') }}</h5>
                             <form method="POST" action="{{ route('users.update', $user) }}" class="mt-3 mb-3">
                                 @csrf
                                 @method('patch')

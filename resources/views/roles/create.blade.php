@@ -1,7 +1,7 @@
 <x-app-layout :breadcrumbs="[
-    ['label' =>__('Dashboard'), 'href' => route('dashboard')],
-    ['label' =>__('Roles'), 'href' => route('roles.index')],
-    ['label' => $pageTitle]
+    ['label' => __('Dashboard'), 'href' => route('dashboard')],
+    ['label' => __('Roles'), 'href' => route('roles.index')],
+    ['label' => __($pageTitle)]
 ]">
     <div class="body flex-grow-1">
         <div class="container-lg px-4">
