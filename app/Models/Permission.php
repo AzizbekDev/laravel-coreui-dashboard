@@ -22,6 +22,16 @@ class Permission extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
