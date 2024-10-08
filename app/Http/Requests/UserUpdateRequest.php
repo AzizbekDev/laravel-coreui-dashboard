@@ -13,8 +13,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
-        return $this->user()->hasRole('admin');
+        return $this->user()->hasPermission('update-users');
     }
 
     /**

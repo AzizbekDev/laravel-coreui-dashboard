@@ -19,9 +19,14 @@ trait HasPermissions
         return $this;
     }
 
-    public function hasPermissionTo($permission)
+    public function hasPermission($permission)
     {
-        return $this->permissions->contains('name', $permission);
+        foreach ($this->roles as $role) {
+            if ($role->permissions->contains('name', $permission)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function permissions()

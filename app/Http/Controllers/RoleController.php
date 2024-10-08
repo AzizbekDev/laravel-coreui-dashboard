@@ -17,8 +17,12 @@ class RoleController extends Controller
      */
     public function index(): View
     {
+        $this->authorizeAction('view-roles');
+
         $pageTitle = 'Roles';
+
         $roles = Role::all();
+
         return view('roles.index', compact('roles', 'pageTitle'));
     }
 
@@ -27,7 +31,10 @@ class RoleController extends Controller
      */
     public function create(): View
     {
+        $this->authorizeAction('create-roles');
+
         $pageTitle = 'Create';
+
         return view('roles.create', compact('pageTitle'));
     }
 
@@ -48,7 +55,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role): View
     {
+        $this->authorizeAction('update-roles');
+        
         $pageTitle = 'Edit';
+        
         return view('roles.edit', compact('role', 'pageTitle'));
     }
 
@@ -69,6 +79,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $this->authorizeAction('delete-roles');
+        
         $role->delete();
 
         toast_message('success', 'Role deleted successfully.');

@@ -18,8 +18,12 @@ class UserController extends Controller
      */
     public function index(): View
     {
+        $this->authorizeAction('view-users');
+
         $pageTitle = 'Users';
+
         $users = User::all();
+
         return view('users.index', compact('users', 'pageTitle'));
     }
 
@@ -28,7 +32,10 @@ class UserController extends Controller
      */
     public function create(): View
     {
+        $this->authorizeAction('create-users');
+
         $pageTitle = 'Create';
+
         return view('users.create', compact('pageTitle'));
     }
 
@@ -49,7 +56,10 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
+        $this->authorizeAction('update-users');
+
         $pageTitle = 'Edit';
+
         return view('users.edit', compact('user', 'pageTitle'));
     }
 
@@ -70,6 +80,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorizeAction('delete-users');
+
         $user->delete();
 
         toast_message('success', 'User deleted successfully.');

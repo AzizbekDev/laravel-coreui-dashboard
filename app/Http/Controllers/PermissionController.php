@@ -17,8 +17,12 @@ class PermissionController extends Controller
      */
     public function index(): View
     {
+        $this->authorizeAction('view-permissions');
+
         $pageTitle   = 'Permissions';
+
         $permissions = Permission::all();
+
         return view('permissions.index', compact('permissions', 'pageTitle'));
     }
     
@@ -27,7 +31,10 @@ class PermissionController extends Controller
      */
     public function create(): View
     {
+        $this->authorizeAction('create-permissions');
+
         $pageTitle = 'Create';
+
         return view('permissions.create', compact('pageTitle'));
     }
 
@@ -48,7 +55,10 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission): View
     {
+        $this->authorizeAction('update-permissions');
+
         $pageTitle = 'Edit';
+
         return view('permissions.edit', compact('permission', 'pageTitle'));
     }
 
@@ -69,6 +79,8 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
+        $this->authorizeAction('delete-permissions');
+        
         $permission->delete();
 
         toast_message('success', 'Permission deleted successfully.');
