@@ -38,13 +38,15 @@ Follow these steps to install the project on your local machine:
 4. Open the `.env` file in your preferred editor (e.g., `nano`, `vim`, or any text editor) and configure the following settings:
 
     - `APP_NAME`: Set the name of your application.
+    - `APP_URL`: Set the url name of your application.
     - `DB_CONNECTION`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD`: Update these to match your local database settings.
 
     Example configuration in `.env`:
 
     ```dotenv
         APP_NAME=LaravelCoreUIDashboard
-        DB_CONNECTION=sqlite # by default we use sqlite or change to mysql if necessary
+        APP_URL=http://localhost # by default localhost.
+        DB_CONNECTION=sqlite # by default we use sqlite or change to mysql if necessary.
         # DB_HOST=127.0.0.1
         # DB_PORT=3306
         # DB_DATABASE=laravel
@@ -56,7 +58,7 @@ Follow these steps to install the project on your local machine:
     - **Windows**:
         Open PowerShell and run:
         ```powershell
-        New-Item -ItemType File -Path "PATH_TO_PROJECT\database\database.sqlite"
+        New-Item -ItemType File "database\database.sqlite"
         ```
 
     - **macOS** or **Ubuntu**:
@@ -78,30 +80,30 @@ Follow these steps to install the project on your local machine:
 8. Install the required Node.js dependencies by running:
 
     ```bash
-        npm install
+    npm install
     ```
 9. Once the dependencies are installed, compile the frontend assets using Laravel Mix:
 
     ```bash
-        npm run dev
+    npm run dev
     ```
     If you are preparing the project for production, run:
 
     ```bash
-        npm run prod
+    npm run build
     ```
 ## Run Migrations
 10. Run the following command to migrate the database and create the necessary tables:
 
     ```bash
-        php artisan migrate
+    php artisan migrate
     ```
 
 ## Run Seeders
 11. Seed the database with initial data by running:
 
     ```bash
-        php artisan db:seed
+    php artisan db:seed
     ```
 This will populate the database with default data, such as user roles and permissions.
 
@@ -110,7 +112,7 @@ This will populate the database with default data, such as user roles and permis
 12. Finally, start the Laravel development server:
 
     ```bash
-        php artisan serve
+    php artisan serve
     ```
 By default, the server will be available at: http://127.0.0.1:8000
 
