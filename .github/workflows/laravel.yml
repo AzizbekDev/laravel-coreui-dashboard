@@ -58,9 +58,9 @@ jobs:
     # Step 9: Create SQLite Database
     - name: Create SQLite Database
       run: |
-        mkdir -p database
-        touch database/database.sqlite
-        echo "Database created at $(pwd)/database/database.sqlite"
+        mkdir -p ${{ github.workspace }}/database
+        touch ${{ github.workspace }}/database/database.sqlite
+        echo "Database created at ${{ github.workspace }}/database/database.sqlite"
   
     # Step 10: Run migrations
     - name: Run Migrations
