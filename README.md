@@ -22,7 +22,7 @@ Follow these steps to install the project on your local machine:
 1. Open your terminal, and run the following command to clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-repo/laravel-coreui-dashboard.git
+    git clone https://github.com/AzizbekDev/laravel-coreui-dashboard.git
     ```
 2. After cloning, navigate into the project directory:
 
