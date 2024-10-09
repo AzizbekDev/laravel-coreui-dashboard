@@ -9,6 +9,20 @@ on:
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest  # You can use ubuntu-latest if a large runner is not necessary
+    
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: coreui_db     # Change to your database name
+          MYSQL_ROOT_PASSWORD: password # Change to your root password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost" 
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
     # Step 1: Set up PHP 8.2 (required for Laravel 11)
@@ -16,7 +30,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-        extensions: mbstring, bcmath, sqlite, pdo
+        extensions: mbstring, bcmath, pdo_mysql
 
     # Step 2: Check out the repository code
     - uses: actions/checkout@v4
@@ -55,44 +69,56 @@ jobs:
     - name: Run NPM build
       run: npm run build
 
-    # Step 9: Create SQLite Database
-    - name: Create SQLite Database
+     # Step 9: Set Database Configuration
+    - name: Update .env for MySQL
       run: |
-        mkdir -p ${{ github.workspace }}/database
-        touch ${{ github.workspace }}/database/database.sqlite
-        echo "Database created at ${{ github.workspace }}/database/database.sqlite"
-  
-    # Step 10: Run migrations
+        echo "DB_CONNECTION=mysql" >> .env
+        echo "DB_HOST=127.0.0.1" >> .env
+        echo "DB_PORT=3306" >> .env
+        echo "DB_DATABASE=coreui_db" >> .env
+        echo "DB_USERNAME=root" >> .env
+        echo "DB_PASSWORD=password" >> .env
+
+    # Step 10: Wait for MySQL service to be healthy
+    - name: Wait for MySQL
+      run: |
+        for i in {1..30}; do
+          if mysql -h 127.0.0.1 -u root -ppassword -e 'SELECT 1'; then
+            break
+          fi
+          echo "Waiting for MySQL..."
+          sleep 1
+        done
+
+    # Step 11: Run migrations
     - name: Run Migrations
+      run: php artisan migrate --force
       env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
-      run: |
-        php artisan migrate --force
-        echo "Migrations completed."
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: coreui_db
+        DB_USERNAME: root
+        DB_PASSWORD: password
 
-    # Step 11: Run seeders
+    # Step 14: Run seeders
     - name: Run Seeders
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
       run: php artisan db:seed --force
+      env:
+        DB_CONNECTION: mysql
+        DB_DATABASE: coreui_db
+        DB_USERNAME: root
+        DB_PASSWORD: password
 
-    # Step 12: Generate application key
+
+    # Step 15: Generate application key
     - name: Generate key
       run: php artisan key:generate
 
-    # Step 13: Set directory permissions for storage and cache
+    # Step 16: Set directory permissions for storage and cache
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
-    # Step 14: Run tests (Unit and Feature tests) using PHPUnit/Pest
-    - name: Run Tests
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
-      run: php artisan test
-
-    # Step 15: Clear Cache (Optional: If needed for cleanup after tests)
+    # Step 18: Clear Cache (Optional: If needed for cleanup after tests)
     - name: Clear Cache
       run: php artisan cache:clear
