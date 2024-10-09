@@ -1,4 +1,4 @@
-name: Laravel
+name: Laravel CI
 
 on:
   push:
@@ -8,28 +8,88 @@ on:
 
 jobs:
   laravel-tests:
-
+  
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: coreui_db
+          MYSQL_ROOT_PASSWORD: secret
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost" 
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
-      with:
-        php-version: '8.0'
     - uses: actions/checkout@v4
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Generate key
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, bcmath, pdo_mysql
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          composer-
+
+    - name: Cache NPM dependencies
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          npm-
+
+    - name: Install Composer dependencies
+      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Install NPM dependencies
+      run: npm install
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Set up .env
+      run: |
+        echo "DB_CONNECTION=mysql" >> .env
+        echo "DB_HOST=127.0.0.1" >> .env
+        echo "DB_PORT=3306" >> .env
+        echo "DB_DATABASE=coreui_db" >> .env
+        echo "DB_USERNAME=root" >> .env
+        echo "DB_PASSWORD=secret" >> .env
+        echo "CACHE_DRIVER=array" >> .env
+
+    - name: Wait for MySQL
+      run: |
+        for i in {1..30}; do
+          if mysql -h 127.0.0.1 -u root -psecret -e 'SELECT 1'; then
+            break
+          fi
+          echo "Waiting for MySQL..."
+          sleep 1
+        done
+
+    - name: Run Migrations
+      run: php artisan migrate --force
+
+    - name: Run Seeders
+      run: php artisan db:seed --force
+
+    - name: Generate Key
       run: php artisan key:generate
+
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-    - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: php artisan test
+
+    - name: Cache All Clear
+      run: php artisan optimize:clear
