@@ -90,8 +90,15 @@ jobs:
           echo "Waiting for MySQL..."
           sleep 1
         done
+    # Step 11: Clear Cache (Optional: If needed for cleanup after tests)
+    - name: Clear Cache
+      run: php artisan cache:clear
 
-    # Step 11: Run migrations
+    # Step 12: Generate application key
+    - name: Generate key
+      run: php artisan key:generate
+
+    # Step 13: Run migrations
     - name: Run Migrations
       run: php artisan migrate --force
       env:
@@ -111,15 +118,10 @@ jobs:
         DB_USERNAME: root
         DB_PASSWORD: password
 
-
-    # Step 15: Generate application key
-    - name: Generate key
-      run: php artisan key:generate
-
-    # Step 16: Set directory permissions for storage and cache
+    # Step 15: Set directory permissions for storage and cache
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
-    # Step 18: Clear Cache (Optional: If needed for cleanup after tests)
+    # Step 16: Clear Cache (Optional: If needed for cleanup after tests)
     - name: Clear Cache
       run: php artisan cache:clear

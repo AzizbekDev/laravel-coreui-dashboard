@@ -17,10 +17,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         // $this->registerPolicies();
-        $permissions = Cache::remember('permissions', 600, function () {
-            return Permission::pluck('name');
-        });
-
+        $permissions = Permission::pluck('name');
+        
         foreach ($permissions as $permission) {
             Gate::define($permission, function ($user) use ($permission) {
                 return $user->hasPermission($permission);
