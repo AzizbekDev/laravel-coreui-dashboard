@@ -101,7 +101,7 @@
                         {{ __('Profile') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link href="{{ route('profile.settings') }}" icon="#cil-settings">
+                    <x-dropdown-link href="{{ route('settings') }}" icon="#cil-settings">
                         {{ __('Settings') }}
                     </x-dropdown-link>
                 

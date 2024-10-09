@@ -17,7 +17,8 @@ Route::post('/set-locale', [SettingController::class, 'setLocale'])
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/settings', [ProfileController::class, 'settings'])->name('profile.settings');    
+    Route::get('/settings', [SettingController::class, 'settings'])->name('settings');
+    Route::patch('/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -26,6 +27,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('roles', RoleController::class)->except(['show']);
     Route::resource('permissions', PermissionController::class)->except(['show']);
+
+
 });
 
 require __DIR__.'/auth.php';
