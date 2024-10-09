@@ -8,7 +8,7 @@ on:
 
 jobs:
   laravel-tests:
-    runs-on: ubuntu-22.04-large  # You can use ubuntu-latest if a large runner is not necessary
+    runs-on: ubuntu-latest  # You can use ubuntu-latest if a large runner is not necessary
 
     steps:
     # Step 1: Set up PHP 8.2 (required for Laravel 11)
