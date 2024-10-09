@@ -91,9 +91,9 @@ jobs:
           sleep 1
         done
 
-    # Step 11: Clear Cache Before Migrations
-    - name: Clear Cache Before Migrations
-      run: php artisan optimize:clear
+    # Step 11: Disable Cache During Migrations
+    - name: Disable Cache During Migrations
+      run: php artisan config:cache
 
     # Step 12: Run database migrations
     - name: Run database migrations
@@ -107,9 +107,9 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
-    # Step 15: Clear Cache After Migrations
-    - name: Clear Cache After Migrations
-      run: php artisan optimize:clear
+    # Step 15: Re-enable Cache
+    - name: Re-enable Cache
+      run: php artisan config:clear
 
     # Step 16: Run tests
     - name: Run tests
