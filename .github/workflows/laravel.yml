@@ -78,6 +78,7 @@ jobs:
         echo "DB_DATABASE=coreui_db" >> .env
         echo "DB_USERNAME=root" >> .env
         echo "DB_PASSWORD=password" >> .env
+        echo "CACHE_DRIVER=array" >> .env
 
     # Step 10: Wait for MySQL service to be healthy
     - name: Wait for MySQL
