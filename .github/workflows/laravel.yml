@@ -55,33 +55,39 @@ jobs:
     - name: Run NPM build
       run: npm run build
 
-    # Step 9: Create a SQLite database for testing
+    # Step 9: Generate application key
+    - name: Generate key
+      run: php artisan key:generate
+
+    # Step 10: Set directory permissions for storage and cache
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    # Step 11: Create SQLite database file
     - name: Create SQLite Database
       run: |
         mkdir -p database
         touch database/database.sqlite
 
-    # Step 10: Generate application key
-    - name: Generate key
-      run: php artisan key:generate
-
-    # Step 11: Set directory permissions for storage and cache
-    - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
-    
-    # Step 12: Run database migrations
+    # Step 12: Run migrations
     - name: Run Migrations
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
       run: php artisan migrate --force
 
     # Step 13: Run seeders
     - name: Run Seeders
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
       run: php artisan db:seed --force
 
     # Step 14: Run tests (Unit and Feature tests) using PHPUnit/Pest
     - name: Run Tests
       env:
         DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_DATABASE: ${{ github.workspace }}/database/database.sqlite # Use absolute path
       run: php artisan test
 
     # Step 15: Clear Cache (Optional: If needed for cleanup after tests)
