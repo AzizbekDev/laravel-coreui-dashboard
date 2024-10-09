@@ -8,7 +8,7 @@ on:
 
 jobs:
   laravel-tests:
-    runs-on: ubuntu-22.04-large  # You can use ubuntu-latest if you don't need a larger runner
+    runs-on: ubuntu-latest  # You can use ubuntu-latest if you don't need a larger runner
 
     services:
       mysql:
