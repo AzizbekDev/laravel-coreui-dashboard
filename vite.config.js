@@ -17,6 +17,11 @@ export default defineConfig({
                 name: "CoreUI Admin Template",
                 short_name: "CoreUI",
                 description: "CoreUI - Open Source Bootstrap Admin Template",
+                background_color: "#ffffff",
+                theme_color: "#ffffff",
+                display: 'standalone',
+                start_url: "/",
+                scope: "/",
                 icons: [
                     {
                         src: '/images/favicon/android-icon-36x36.png',
@@ -55,10 +60,11 @@ export default defineConfig({
                         density: '4.0',
                     }
                 ],
-                start_url: '/',
-                display: 'standalone',
-                background_color: '#ffffff',
-                theme_color: '#ffffff',
+            },
+            workbox: {
+                cleanupOutdatedCaches: true,
+                clientsClaim: true,
+                skipWaiting: true,
             }
         }),
     ],

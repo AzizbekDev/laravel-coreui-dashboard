@@ -12,7 +12,6 @@ body {
 
 .header > .container-fluid,
 .sidebar-header {
-  justify-content: center;
   min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
 }
 
@@ -21,6 +20,7 @@ body {
 }
 
 .sidebar-header {
+  justify-content: center;
   .nav-underline-border {
     --cui-nav-underline-border-link-padding-x: 1rem;
     --cui-nav-underline-border-gap: 0;
