@@ -1,12 +1,11 @@
 <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
       <div class="sidebar-header border-bottom">
         <div class="sidebar-brand">
-          <svg class="sidebar-brand-full" width="88" height="32" alt="CoreUI Logo">
-            <use xlink:href="{{ asset('icons/brands/coreui.svg#full') }}"></use>
-          </svg>
-          <svg class="sidebar-brand-narrow" width="32" height="32" alt="CoreUI Logo">
-            <use xlink:href="{{ asset('icons/brands/coreui.svg#signet') }}"></use>
-          </svg>
+          <a href="{{ route('dashboard') }}" class="text-white">
+            <span class="sidebar-brand-full">
+              <img src="{{ asset('images/brand/brand.svg') }}" alt="Logo" width="100" height="40">
+            </span>  
+          </a>
         </div>
         <button class="btn-close d-lg-none" type="button" data-coreui-dismiss="offcanvas" data-coreui-theme="dark" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector(&quot;#sidebar&quot;)).toggle()"></button>
       </div>

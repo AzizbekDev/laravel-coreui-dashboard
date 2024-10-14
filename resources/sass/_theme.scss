@@ -12,6 +12,7 @@ body {
 
 .header > .container-fluid,
 .sidebar-header {
+  justify-content: center;
   min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
 }
 

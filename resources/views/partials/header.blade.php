@@ -89,7 +89,7 @@
                 <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#"
                     role="button" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-md">
-                        <img class="avatar-img" src="{{ asset('img/avatars/8.jpg') }}" alt="user@email.com">
+                        <img class="avatar-img" src="{{ asset('images/profile/profile.png') }}" alt="{{ __('Avatar') }}">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
