@@ -18,19 +18,16 @@
                 <div class="col-12 px-3 pb-3">
                     <div class="p-4 shadow rounded">
                         <div class="w-100">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 px-3 pb-3">
-                    <div class="p-4 shadow rounded">
-                        <div class="w-100">
-                            
+                            @include('settings.partials.update-app-information-form')
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @if (session('status') === 'update-failed')
+        @php
+            toast_message('error', 'Profile update failed.');
+        @endphp
+    @endif
 </x-app-layout>
