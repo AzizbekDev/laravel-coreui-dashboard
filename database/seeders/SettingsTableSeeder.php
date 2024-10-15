@@ -31,21 +31,8 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'key'   => 'app_logo',
-                'value' => '',
-                'type'  => 'svg',
-                'options' => json_encode([
-                    'sizes' => '32x32',
-                    'type'  => 'image/png'
-                ])
-            ],
-            [
-                'key'   => 'app_favicon',
-                'value' => '',
-                'type'  => 'svg',
-                'options' => json_encode([
-                    'sizes' => '32x32',
-                    'type'  => 'image/png'
-                ])
+                'value' => 'brand.svg',
+                'type'  => 'file',
             ],
             [
                 'key'   => 'app_email',
@@ -56,7 +43,12 @@ class SettingsTableSeeder extends Seeder
                 'key'   => 'app_phone',
                 'value' => '+1234567890',
                 'type'  => 'text'
-            ]
+            ],
+            [
+                'key'   => 'profile',
+                'value' => 'profile.png',
+                'type'  => 'image',
+            ],
         ];
 
         foreach ($settings as $setting) {
