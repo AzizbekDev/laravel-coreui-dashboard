@@ -127,7 +127,10 @@ class FileManager
         //resize the
 	    if ($this->size) {
 	        $size = explode('x', strtolower($this->size));
-	        $image->resize($size[0], $size[1]);
+	        $image->resize($size[0], $size[1], function($constraint){
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 	    }
         //save the image
 	    $image->save($this->path . '/' . $this->filename);
@@ -138,7 +141,11 @@ class FileManager
                 $this->removeFile($this->path . '/thumb_' . $this->old);
             }
 	        $thumb = explode('x', $this->thumb);
-	        Image::read($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
+	        Image::read($this->file)
+                ->resize($thumb[0], $thumb[1], function($constraint){
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($this->path . '/thumb_' . $this->filename);
 	    }
 	}
 
@@ -226,13 +233,13 @@ class FileManager
     * @return string|void
     */
 	public function __call($method,$args){
-        $fileInfo = new FileInfo;
+        $fileInfo  = new FileInfo;
 		$filePaths = $fileInfo->fileInfo();
 		if (array_key_exists($method, $filePaths)) {
 			$path = json_decode(json_encode($filePaths[$method]));
 			return $path;
-		}else{
-			$this->$method(...$args);
+		} else {
+			throw new \Exception('Method not found');
 		}
 	}
 

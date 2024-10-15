@@ -21,12 +21,12 @@ class FileInfo
         $data['brand'] = [
             'path'      => 'images/brand',
             'default'   => 'images/brand/brand.svg',
-            'size'      => '100x40',
+            'size'      => '150x50',
         ];
         $data['profile'] = [
             'path'      => 'images/profile',
             'default'   => 'images/profile/profile.png',
-            'size'      => '350x300',
+            'size'      => '300x300',
         ];
         return $data;
     }
