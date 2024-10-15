@@ -3,7 +3,7 @@
         <div class="sidebar-brand">
           <a href="{{ route('dashboard') }}" class="text-white">
             <span class="sidebar-brand-full">
-              <img src="{{ asset('images/brand/brand.svg') }}" alt="Logo" width="100" height="40">
+              <img src="{{ getImage('brand', $settings['app_logo'] ?? '') }}" alt="Logo" width="150" height="50">
             </span>  
           </a>
         </div>
