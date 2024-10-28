@@ -14,8 +14,8 @@
                                 @csrf
                                 <div class="mb-3">
                                     <x-input-label for="name" :value="__('Name')" />
-                                    <x-text-input id="name" name="name" type="text" class="mt-1"
-                                        :value="old('name')" required autocomplete="name" />
+                                    <x-text-input id="name" name="name" type="text" class="mt-1" :value="old('name')"
+                                        required autocomplete="name" />
                                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                 </div>
                                 <div class="mb-3">
@@ -24,8 +24,14 @@
                                         :value="old('description')" required autocomplete="description" />
                                     <x-input-error class="mt-2" :messages="$errors->get('description')" />
                                 </div>
+                                <div class="mb-3">
+                                    <x-input-label for="permissions" :value="__('Permissions')" />
+                                    <x-input-select id="permissions" name="permissions[]" :options="$permissions" class="mt-1" multiple required></x-input-select>
+                                    <x-input-error class="mt-2" :messages="$errors->get('permissions')" />
+                                </div>
                                 <div class="d-flex justify-content-between">
-                                    <x-button-link :href="route('roles.index')" color="outline-secondary" class="fw-bold">
+                                    <x-button-link :href="route('roles.index')" color="outline-secondary"
+                                        class="fw-bold">
                                         {{ __('Back') }}
                                     </x-button-link>
                                     <x-primary-button>{{ __('Save') }}</x-primary-button>

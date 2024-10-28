@@ -23,7 +23,8 @@ class RoleStoreRequest extends FormRequest
     {
         return [
             'name'        => 'required|string|max:50|unique:roles',
-            'description' => 'required|string|max:100'
+            'description' => 'required|string|max:100',
+            'permissions' => 'required|array',
         ];
     }
 

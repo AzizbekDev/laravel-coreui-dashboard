@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleStoreRequest;
@@ -21,8 +22,8 @@ class RoleController extends Controller
 
         $pageTitle = 'Roles';
 
-        $roles = Role::all();
-
+        $roles = Role::with('permissions')->get();
+        
         return view('roles.index', compact('roles', 'pageTitle'));
     }
 
@@ -33,9 +34,9 @@ class RoleController extends Controller
     {
         $this->authorizeAction('create-roles');
 
-        $pageTitle = 'Create';
-
-        return view('roles.create', compact('pageTitle'));
+        $pageTitle   = 'Create';
+        $permissions = Permission::orderBy('id')->pluck('name', 'id')->toArray();
+        return view('roles.create', compact('permissions', 'pageTitle'));
     }
 
     /**
@@ -43,7 +44,8 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request): RedirectResponse
     {
-        Role::create($request->validated());
+        $role = Role::create($request->validated());
+        $role->permissions()->sync($request->permissions);
 
         toast_message('success', 'Role created successfully.');
         
@@ -56,10 +58,12 @@ class RoleController extends Controller
     public function edit(Role $role): View
     {
         $this->authorizeAction('update-roles');
+    
+        $role->load('permissions');
+        $pageTitle   = 'Edit';
+        $permissions = Permission::orderBy('id')->pluck('name', 'id')->toArray();
         
-        $pageTitle = 'Edit';
-        
-        return view('roles.edit', compact('role', 'pageTitle'));
+        return view('roles.edit', compact('role', 'permissions', 'pageTitle'));
     }
 
     /**
@@ -68,6 +72,8 @@ class RoleController extends Controller
     public function update(RoleUpdateRequest $request, Role $role): RedirectResponse
     {
         $role->update($request->validated());
+
+        $role->permissions()->sync($request->permissions);
         
         toast_message('success', 'Role updated successfully.');
         

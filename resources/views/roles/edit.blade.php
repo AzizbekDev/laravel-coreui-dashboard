@@ -25,6 +25,14 @@
                                         :value="old('description', $role->description)" required autocomplete="description" />
                                     <x-input-error class="mt-2" :messages="$errors->get('description')" />
                                 </div>
+                                <div class="mb-3">
+                                    <x-input-label for="permissions" :value="__('Permissions')" />
+                                    <x-input-select id="permissions" name="permissions[]" :options="$permissions"
+                                        :selected="old('permissions', $role->permissions->pluck('id')->toArray())" multiple
+                                        required />
+                                    <x-input-error class="mt-2" :messages="$errors->get('permissions')" />
+                                </div>
+
                                 <div class="d-flex justify-content-between">
                                     <x-button-link :href="route('roles.index')" color="outline-secondary" class="fw-bold">
                                         {{ __('Back') }}

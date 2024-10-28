@@ -23,6 +23,7 @@
                                 <th scope="col">{{ __('No') }}</th>
                                 <th scope="col">{{ __('Name') }}</th>
                                 <th scope="col">{{ __('Description') }}</th>
+                                <th scope="col">{{ __('Permissions') }}</th>
                                 <th scope="col" width="280px">{{ __('Action') }}</th>
                             </tr>
                         </thead>
@@ -32,6 +33,10 @@
                                 <td scope="row">{{ $loop->iteration }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->description }}</td>
+                                <td width="35%">
+                                    @foreach ($role->permissions as $permission)
+                                    <span class="badge bg-primary">{{ $permission->name }}</span>
+                                    @endforeach
                                 <td>
                                     <x-button-link :href="route('roles.edit', $role->id)" class="fw-bold text-white" color="info">
                                         {{ __('Edit') }}

@@ -6,6 +6,8 @@
         @include('partials.head')
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        <!-- Custom styles -->
+        @stack('styles')
     </head>
 
     <body>
@@ -25,6 +27,7 @@
             }
         });
         </script>
+        @stack('scripts')
     </body>
 
 </html>
