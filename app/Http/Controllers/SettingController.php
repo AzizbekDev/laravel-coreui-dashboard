@@ -23,6 +23,9 @@ class SettingController extends Controller
         return view('settings.index', compact('settings','pageTitle'));
     }
 
+    /**
+     * Update the settings.
+     */
     public function update(Request $request): RedirectResponse
     {
         $this->authorizeAction('update-settings');
